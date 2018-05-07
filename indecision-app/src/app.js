@@ -4,47 +4,52 @@ console.log('App.js is running!')
 const appHeader = {
     title: "Meu título",
     subtitle: "meu subtítulo",
-    options:[
-        'one',
-        'two'
-    ]
+    options:[]
 };
 
-const template = (
-    <div>
-        <h1>{appHeader.title}</h1>
-        {appHeader.subtitle && <p>{appHeader.subtitle}</p>}
-        {appHeader.options.length > 0 ? <p>Here are your options</p> : <p>No options</p> }
-        <ol>
-            <li>{appHeader.options[0]}</li>
-            <li>{appHeader.options[1]}</li>
-        </ol>
-    </div>
-);
+const onFormSubmit = (e) =>{
+    e.preventDefault();
 
-let count = 0;
-const addOne = () => {
-    console.log("addOne")
+    const option = e.target.elements.option.value;
+    if(option){
+        appHeader.options.push(option);
+        e.target.elements.option.value = '';
+        render();
+    }
 };
 
-const minusOne = () => {
-    console.log("minusOne")
+const onRemoveAllOptions = () => {
+    appHeader.options = [];
+    render();
 };
-
-const reset = () => {
-    console.log("reset")
-};
-
-const templateTwo = (
-    <div>
-        <h1>Count: {count}</h1>
-        <button onClick={addOne}>+1</button>
-        <button onClick={minusOne}>-1</button>
-        <button onClick={reset}>Reset</button>
-    </div>
-);
-
 
 const appRoot = document.getElementById("app");
 
-ReactDOM.render(templateTwo, appRoot);
+const render = () => {
+    const template = (
+        <div>
+            <h1>{appHeader.title}</h1>
+            {appHeader.subtitle && <p>{appHeader.subtitle}</p>}
+            {appHeader.options.length > 0 ? <p>Here are your options</p> : <p>No options</p> }
+            <p>{appHeader.options.length}</p>
+            <button onClick={onRemoveAllOptions}>Remove All</button>
+            <ol>
+                {
+                    appHeader.options.map((option) => {
+                        return <li key={option}>{option}</li>
+                    })
+                }
+            </ol>
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option"/>
+                <button>Add option</button>
+            </form>
+        </div>
+    );
+
+    
+    ReactDOM.render(template, appRoot);
+}
+
+render();
+
