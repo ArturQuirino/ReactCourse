@@ -1,23 +1,32 @@
 console.log('App.js is running!')
-const appRoot = document.getElementById("app");
 
-let togle = false;
+class VisibilityToggle extends React.Component {
+    constructor(props){
+        super(props);
+        this.onToggle = this.onToggle.bind(this);
+        this.state = {
+            toggle: false
+        }
+    }
 
-const onTogle = () => {
-    togle = !togle;
-    render();
-};
+    onToggle(){
+        this.setState((prevState) => {
+                return {
+                    toggle: !prevState.toggle
+                };
+            }
+        );
+    }
 
-const render = () => {
-    const content = (
-        <div>
-            <h1>Visibility App</h1>
-            <button onClick={onTogle}>{togle ? 'Hide details' : 'Show Details'}</button>
-            {togle && <p>Here are some details</p>}
-        </div>
-    );
-    
-    ReactDOM.render(content, appRoot)
-};
+    render() {
+        return (
+            <div>
+                <h1>Visibility App</h1>
+                <button onClick={this.onToggle}>{this.state.toggle ? 'Hide details' : 'Show details'}</button>
+                {this.state.toggle && <p>Here are some details!</p>}
+            </div>
+        );
+    }
+}
 
-render();
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
