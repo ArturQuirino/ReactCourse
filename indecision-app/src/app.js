@@ -5,9 +5,25 @@
 // console.log(add(1, 6));
 
 
-import {isAdult, canDrink} from './person.js';
+// import isSenior, {isAdult, canDrink} from './person.js';
 
-console.log(isAdult(19));
-console.log(isAdult(16));
-console.log(canDrink(23));
-console.log(canDrink(16));
+// console.log(isAdult(19));
+// console.log(isAdult(16));
+// console.log(canDrink(23));
+// console.log(canDrink(16));
+// console.log(isSenior(65));
+// console.log(isSenior(63));
+
+
+// import validator from 'validator';
+
+// console.log(validator.isEmail('artur@gmail.com'));
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const template = <p>THIS IS JSX FROM WEBPACK</p>
+ReactDOM.render(template, document.getElementById('app'));
